@@ -1,0 +1,28 @@
+import java.util.HashMap;
+import java.util.Map;
+
+class Solucion {
+    // Método que encuentra dos números en el arreglo 'nums' que sumen 'target'
+    public int[] DosSuma(int[] nums, int target) {
+        // Crear un HashMap para almacenar los números que ya hemos visto y sus índices
+        Map<Integer, Integer> seen = new HashMap<>();
+        
+        // Recorremos el arreglo 'nums' para buscar los dos números cuya suma sea igual a 'target'
+        for (int i = 0; i < nums.length; i++) {
+            // Calculamos la diferencia que necesitamos encontrar (target - nums[i])
+            int diff = target - nums[i];
+            
+            // Verificamos si la diferencia 'diff' ya ha sido vista antes en el HashMap 'seen'
+            if (seen.containsKey(diff)) {
+                // Si la diferencia ya está en 'seen', devolvemos los índices de los dos números
+                return new int[]{seen.get(diff), i};
+            }
+            
+            // Si no encontramos la diferencia, guardamos el número actual y su índice en 'seen'
+            seen.put(nums[i], i);
+        }
+        
+        // Si no se encuentran dos números que sumen 'target', devolvemos un arreglo vacío
+        return new int[]{};
+    }
+}
